@@ -1,0 +1,463 @@
+/*
+
+import SwiftUI
+
+
+
+struct AnotherVideoPageView: View {
+
+    var body: some View {
+
+        NavigationView {
+
+            VStack(alignment: .leading) {
+
+                Text("Rhymes to Explore!")
+
+                    .font(.largeTitle)
+
+                    .fontWeight(.bold)
+
+                    .foregroundColor(.blue)
+
+                    .padding(.leading)
+
+                    .padding(.top, 40)
+
+                
+
+                ForEach(["Twinkle Twinkle Little Star", "Alphabets"], id: \.self) { rhyme in
+
+                    NavigationLink(destination: destination(for: rhyme)) {
+
+                        HStack {
+
+                            Image(systemName: "play.circle.fill")
+
+                                .font(.system(size: 30))
+
+                                .foregroundColor(.white)
+
+                                .padding(.trailing, 10)
+
+                            VStack(alignment: .leading) {
+
+                                Text(rhyme == "Twinkle Twinkle Little Star" ? "Twinkle Twinkle Little Star" : "Alphabet Song")
+
+                                    .foregroundColor(.white)
+
+                                    .font(.title2)
+
+                                    .fontWeight(.medium)
+
+                                Text(rhyme)
+
+                                    .foregroundColor(.white)
+
+                                    .font(.title2)
+
+                                    .fontWeight(.medium)
+
+                            }
+
+                        }
+
+                        .frame(height: 80)
+
+                        .padding()
+
+                        .background(
+
+                            RoundedRectangle(cornerRadius: 10)
+
+                                .fill(LinearGradient(gradient: Gradient(colors: [Color(UIColor(red: 0.8, green: 0.9, blue: 1, alpha: 1)), Color(UIColor(red: 0.6, green: 0.8, blue: 1, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing))
+
+                        )
+
+                    }
+
+                }
+
+                .background(Color.white.ignoresSafeArea())
+
+            }
+
+        }
+
+    }
+
+    
+
+    @ViewBuilder
+
+    func destination(for rhyme: String) -> some View {
+
+        switch rhyme {
+
+        case "Twinkle Twinkle Little Star":
+
+            VideoPageView()
+
+        case "Alphabets":
+
+            AlphabetPageView()
+
+        default:
+
+            EmptyView()
+
+        }
+
+    }
+
+}
+
+
+
+struct RhymeDetailView: View {
+
+    let rhyme: String
+
+    
+
+    var body: some View {
+
+        Text(rhyme)
+
+            .font(.largeTitle)
+
+            .fontWeight(.bold)
+
+            .padding()
+
+    }
+
+}
+
+/*
+
+struct AlphabetPageView: View {
+
+    var body: some View {
+
+        Text("Alphabets Page View")
+
+    }
+
+}
+
+
+
+struct VideoPageView: View {
+
+    var body: some View {
+
+        Text("Video Page View")
+
+    }
+
+}
+
+*/
+
+struct VideoCardView: View {
+
+    let title: String
+
+    
+
+    var body: some View {
+
+        RoundedRectangle(cornerRadius: 10)
+
+            .fill(Color.blue)
+
+            .frame(height: 50)
+
+            .overlay(
+
+                Text("Video Page View: \(title)")
+
+                    .foregroundColor(.black)
+
+            )
+
+    }
+
+}
+
+
+
+struct CardView: View {
+
+    let content: AnyView
+
+    
+
+    init(@ViewBuilder content: () -> some View) {
+
+        self.content = AnyView(content())
+
+    }
+
+    
+
+    var body: some View {
+
+        RoundedRectangle(cornerRadius: 10)
+
+            .fill(Color.white)
+
+            .frame(height: 50)
+
+            .overlay(content)
+
+    }
+
+}
+
+
+
+struct AnotherVideoPage_Previews: PreviewProvider {
+
+    static var previews: some View {
+
+        AnotherVideoPageView()
+
+    }
+
+}
+
+*/
+
+import SwiftUI
+
+
+
+struct AnotherVideoPageView: View {
+
+    var body: some View {
+
+        NavigationView {
+
+            VStack(alignment: .leading) {
+
+                Text("Rhymes to Explore!")
+
+                    .font(.largeTitle)
+
+                    .fontWeight(.bold)
+
+                    .foregroundColor(.blue)
+
+                    .padding(.leading)
+
+                    .padding(.top, 40)
+
+               
+
+                ForEach(["Twinkle Twinkle Little Star","Row Row Row A Boat","Alphabets"], id: \.self) { rhyme in
+
+                    NavigationLink(destination: destination(for: rhyme)) {
+
+                        HStack {
+
+                            Image(systemName: "play.circle.fill")
+
+                                .font(.system(size: 30))
+
+                                .foregroundColor(.white)
+
+                                .padding(.trailing, 10)
+
+                            VStack(alignment: .leading) {
+
+                                Text(rhyme == /*"Twinkle Twinkle Little Star" ?*/ "Twinkle Twinkle Little Star" : "Alphabet Song":"Row Row Row A Boat")
+
+                                    .foregroundColor(.white)
+
+                                    .font(.title2)
+
+                                    .fontWeight(.medium)
+
+                                Text(rhyme)
+
+                                    .foregroundColor(.white)
+
+                                    .font(.title2)
+
+                                    .fontWeight(.medium)
+
+                            }
+
+                        }
+
+                        .frame(height: 80)
+
+                        .padding()
+
+                        .background(
+
+                            RoundedRectangle(cornerRadius: 10)
+
+                                .fill(LinearGradient(gradient: Gradient(colors: [Color(UIColor(red: 0.8, green: 0.9, blue: 1, alpha: 1)), Color(UIColor(red: 0.6, green: 0.8, blue: 1, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing))
+
+                        )
+
+                    }
+
+                }
+
+                .background(Color.white.ignoresSafeArea())
+
+            }
+
+        }
+
+    }
+
+   
+
+    @ViewBuilder
+
+    func destination(for rhyme: String) -> some View {
+
+        switch rhyme {
+
+        case "Twinkle Twinkle Little Star":
+
+            VideoPageView()
+
+        case "Alphabets":
+
+            AlphabetPageView()
+
+case "Row Row Row A Boat":
+
+            RhymesPageView()
+
+        default:
+
+            EmptyView()
+
+        }
+
+    }
+
+}
+
+
+
+struct RhymeDetailView: View {
+
+    let rhyme: String
+
+   
+
+    var body: some View {
+
+        Text(rhyme)
+
+            .font(.largeTitle)
+
+            .fontWeight(.bold)
+
+            .padding()
+
+    }
+
+}
+
+/*
+
+struct AlphabetPageView: View {
+
+    var body: some View {
+
+        Text("Alphabets Page View")
+
+    }
+
+}
+
+
+
+struct VideoPageView: View {
+
+    var body: some View {
+
+        Text("Video Page View")
+
+    }
+
+}
+
+*/
+
+struct VideoCardView: View {
+
+    let title: String
+
+   
+
+    var body: some View {
+
+        RoundedRectangle(cornerRadius: 10)
+
+            .fill(Color.blue)
+
+            .frame(height: 50)
+
+            .overlay(
+
+                Text("Video Page View: \(title)")
+
+                    .foregroundColor(.black)
+
+            )
+
+    }
+
+}
+
+
+
+struct CardView: View {
+
+    let content: AnyView
+
+   
+
+    init(@ViewBuilder content: () -> some View) {
+
+        self.content = AnyView(content())
+
+    }
+
+   
+
+    var body: some View {
+
+        RoundedRectangle(cornerRadius: 10)
+
+            .fill(Color.white)
+
+            .frame(height: 50)
+
+            .overlay(content)
+
+    }
+
+}
+
+
+
+struct AnotherVideoPage_Previews: PreviewProvider {
+
+    static var previews: some View {
+
+        AnotherVideoPageView()
+
+    }
+
+}

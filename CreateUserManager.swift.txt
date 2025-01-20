@@ -1,0 +1,130 @@
+import Foundation
+
+
+
+class CreateUserManager {
+
+    let fileURL: URL
+
+    
+
+    init(fileURL: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("users.txt")) {
+
+        self.fileURL = fileURL
+
+    }
+
+    
+
+    func createUser(username: String, phoneNumber: String, password: String) -> Bool {
+
+        // Check if the user already exists
+
+        if self.doesUserExist(username: username) {
+
+            return false
+
+        }
+
+        
+
+        // Create a new user
+
+        let user = "\(username):\(phoneNumber):\(password)\n"
+
+        do {
+
+            var fileHandle = FileHandle(forWritingAtPath: fileURL.path)
+
+            if fileHandle == nil {
+
+                // Create the file if it doesn't exist
+
+                try "".write(to: fileURL, atomically: true, encoding: .utf8)
+
+                fileHandle = FileHandle(forWritingAtPath: fileURL.path)
+
+            }
+
+            fileHandle?.seekToEndOfFile()
+
+            fileHandle?.write(user.data(using: .utf8)!)
+
+            return true
+
+        } catch {
+
+            print("Error creating user: \(error)")
+
+            return false
+
+        }
+
+    }
+
+    
+
+    func doesUserExist(username: String) -> Bool {
+
+        do {
+
+            let fileContent = try String(contentsOf: fileURL, encoding: .utf8)
+
+            let users = fileContent.components(separatedBy: "\n")
+
+            for user in users {
+
+                let components = user.components(separatedBy: ":")
+
+                if components.count == 3, components[0] == username {
+
+                    return true
+
+                }
+
+            }
+
+        } catch {
+
+            print("Error reading file: \(error)")
+
+        }
+
+        return false
+
+    }
+
+    
+
+    func authenticateUser(username: String, password: String) -> Bool {
+
+        do {
+
+            let fileContent = try String(contentsOf: fileURL, encoding: .utf8)
+
+            let users = fileContent.components(separatedBy: "\n")
+
+            for user in users {
+
+                let components = user.components(separatedBy: ":")
+
+                if components.count == 3, components[0] == username, components[2] == password {
+
+                    return true
+
+                }
+
+            }
+
+        } catch {
+
+            print("Error reading file: \(error)")
+
+        }
+
+        return false
+
+    }
+
+}
+

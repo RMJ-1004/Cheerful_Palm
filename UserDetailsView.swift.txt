@@ -1,0 +1,107 @@
+import SwiftUI
+
+
+
+struct UserDetailsView: View {
+
+    @State private var username: String = ""
+
+    @State private var phoneNumber: String = ""
+
+    @State private var password: String = ""
+
+    @State private var errorMessage: String = ""
+
+    let userManager = CreateUserManager()
+
+    
+
+    var body: some View {
+
+        VStack {
+
+            TextField("Username", text: $username)
+
+                .padding()
+
+                .background(Color.white)
+
+                .cornerRadius(10)
+
+                .padding(.bottom)
+
+            
+
+            TextField("Phone Number", text: $phoneNumber)
+
+                .padding()
+
+                .background(Color.white)
+
+                .cornerRadius(10)
+
+                .padding(.bottom)
+
+            
+
+            SecureField("Password", text: $password)
+
+                .padding()
+
+                .background(Color.white)
+
+                .cornerRadius(10)
+
+                .padding(.bottom)
+
+            
+
+            Button(action: {
+
+                // Save user details
+
+                let success = userManager.createUser(username: username, phoneNumber: phoneNumber, password: password)
+
+                if success {
+
+                    errorMessage = "User created successfully"
+
+                } else {
+
+                    errorMessage = "User already exists"
+
+                }
+
+            }) {
+
+                Text("Save")
+
+                    .frame(maxWidth: .infinity)
+
+                    .padding()
+
+                    .background(Color.blue)
+
+                    .foregroundColor(.white)
+
+                    .cornerRadius(10)
+
+            }
+
+            .padding(.bottom)
+
+            
+
+            Text(errorMessage)
+
+                .foregroundColor(.red)
+
+                .padding(.top)
+
+        }
+
+        .padding()
+
+    }
+
+}

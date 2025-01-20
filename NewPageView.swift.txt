@@ -1,0 +1,141 @@
+import SwiftUI
+
+
+
+struct NextPageView: View {
+
+    @State private var showUserDetails = false
+
+    @State private var loginUsername: String = ""
+
+    @State private var loginPassword: String = ""
+
+    @State private var loginErrorMessage: String = ""
+
+    @State private var isLoggedIn = false
+
+    let userManager = CreateUserManager()
+
+    
+
+    var body: some View {
+
+        NavigationView {
+
+            VStack {
+
+                TextField("Username", text: $loginUsername)
+
+                    .padding()
+
+                    .background(Color.white)
+
+                    .cornerRadius(10)
+
+                    .padding(.bottom)
+
+                
+
+                SecureField("Password", text: $loginPassword)
+
+                    .padding()
+
+                    .background(Color.white)
+
+                    .cornerRadius(10)
+
+                    .padding(.bottom)
+
+                
+
+                Button(action: {
+
+                    // Login action
+
+                    let success = userManager.authenticateUser(username: loginUsername, password: loginPassword)
+
+                    if success {
+
+                        loginErrorMessage = ""
+
+                        isLoggedIn = true
+
+                    } else {
+
+                        loginErrorMessage = "Invalid username or password"
+
+                        isLoggedIn = false
+
+                    }
+
+                }) {
+
+                    Text("Login")
+
+                        .frame(maxWidth: .infinity)
+
+                        .padding()
+
+                        .background(Color.blue)
+
+                        .foregroundColor(.white)
+
+                        .cornerRadius(10)
+
+                }
+
+                
+
+                Text(loginErrorMessage)
+
+                    .foregroundColor(.red)
+
+                    .padding(.top)
+
+                
+
+                NavigationLink(destination: LoggedInView(), isActive: $isLoggedIn) {
+
+                    EmptyView()
+
+                }
+
+                
+
+                Button(action: {
+
+                    self.showUserDetails = true
+
+                }) {
+
+                    Text("Sign up")
+
+                        .frame(maxWidth: .infinity)
+
+                        .padding()
+
+                        .background(Color.green)
+
+                        .foregroundColor(.white)
+
+                        .cornerRadius(10)
+
+                }
+
+                .padding(.top)
+
+            }
+
+            .padding()
+
+            .sheet(isPresented: $showUserDetails) {
+
+                UserDetailsView()
+
+            }
+
+        }
+
+    }
+
+}
